@@ -1,16 +1,15 @@
 // you can import like this when too many files root
 // import Counter from "@/app/_components/Counter";
 
-import CabinCard from "@/app/_components/CabinCard";
+import { Suspense } from "react";
+import CabinList from "../_components/CabinList";
+import Spinner from "../_components/Spinner";
 
 export const metadata = {
   title: "Cabins",
 };
 
 export default function Page() {
-  // CHANGE
-  const cabins = [];
-
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
@@ -25,13 +24,9 @@ export default function Page() {
         to paradise.
       </p>
 
-      {cabins.length > 0 && (
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">
-          {cabins.map((cabin) => (
-            <CabinCard cabin={cabin} key={cabin.id} />
-          ))}
-        </div>
-      )}
+      <Suspense fallback={<Spinner />}>
+        <CabinList />
+      </Suspense>
     </div>
   );
 }
