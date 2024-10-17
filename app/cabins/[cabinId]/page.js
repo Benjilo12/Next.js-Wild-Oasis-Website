@@ -1,12 +1,31 @@
 import { getCabin } from "@/app/_lib/data-service";
+import { notFound } from "next/navigation";
 import Image from "next/image";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 
-// PLACEHOLDER DATA
+//using params as Metadata
+export async function generateMetadata({ params }) {
+  const { name } = await getCabin(params.cabinId);
+  return { title: `Cabin ${name}` };
+}
+
+//making the params page static route
+export async function generateStaticParams() {
+  const cabins = await getCabin();
+  const ids = cabins.map((cabin) => ({
+    cabinId: String(cabin.id), // Use String() to convert to string
+  }));
+
+  return ids;
+}
 
 export default async function Page({ params }) {
   //we use the cabin Id as params
   const cabin = await getCabin(params.cabinId);
+
+  if (!cabin) {
+    notFound();
+  }
 
   const { id, name, maxCapacity, regularPrice, discount, image, description } =
     cabin;
