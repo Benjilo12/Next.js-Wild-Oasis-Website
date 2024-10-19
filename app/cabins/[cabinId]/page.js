@@ -9,14 +9,19 @@ export async function generateMetadata({ params }) {
   return { title: `Cabin ${name}` };
 }
 
-//making the params page static route
-export async function generateStaticParams() {
-  const cabins = await getCabin();
-  const ids = cabins.map((cabin) => ({
-    cabinId: String(cabin.id), // Use String() to convert to string
-  }));
+// //making the params page static route
+// export async function generateStaticParams() {
+//   const cabins = await getCabin();
+//   const ids = cabins.map((cabin) => ({
+//     cabinId: String(cabin.id), // Use String() to convert to string
+//   }));
 
-  return ids;
+//   return ids;
+// }
+
+export async function generateStaticParams() {
+  const cabinIds = ["105", "106", "107", "108", "109", " 110", "111", "112"]; // Replace with real IDs or fetched data
+  return cabinIds.map((id) => ({ cabinId: id }));
 }
 
 export default async function Page({ params }) {

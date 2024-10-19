@@ -1,7 +1,9 @@
+// import { unstable_noStore as nostore } from "next/cache";
 import { getCabins } from "../_lib/data-service";
 import CabinCard from "./CabinCard";
 
 async function CabinList() {
+  // nostore();
   // CHANGE
   //WE fetch and acess data from supabase using supabase function
   const cabins = await getCabins();
