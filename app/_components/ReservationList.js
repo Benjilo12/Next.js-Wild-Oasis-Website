@@ -1,7 +1,8 @@
 "use client";
 
-import { deleteReservation } from "../_lib/actions";
+import { deleteBooking } from "../_lib/actions";
 import ReservationCard from "./ReservationCard";
+import { useOptimistic } from "react";
 
 function ReservationList({ bookings }) {
   //useOptimistic hook with this state, if the promise fails the state returns to original state without throwing an error
@@ -14,7 +15,7 @@ function ReservationList({ bookings }) {
 
   async function handleDelete(bookingId) {
     optimisticDelete(bookingId);
-    await deleteReservation(bookingId);
+    await deleteBooking(bookingId);
   }
   return (
     <ul className="space-y-6">

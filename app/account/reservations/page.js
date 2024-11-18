@@ -9,6 +9,7 @@ export const metadata = {
 
 export default async function Page() {
   // CHANGE
+  //we get the questId from currently loggin in user
   const session = await auth();
   const bookings = await getBookings(session.user.guestId);
 
